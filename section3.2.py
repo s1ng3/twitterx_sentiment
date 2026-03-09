@@ -12,7 +12,7 @@ EXCLUDE_WORDS = {
 # Read tweets and extract all words
 all_words = []
 
-with open("twitter_data1.txt", "r", encoding="utf-8") as fin:
+with open("twitter_data1.txt", "r") as fin:
     for line in fin:
         line = line.strip()
         if line:
@@ -33,10 +33,6 @@ word_freq = Counter(all_words)
 
 # Get the 500 most common words
 top_500 = word_freq.most_common(500)
-
-# Display results
-
-print("\nRank | Word                    | Frequency")
 
 for rank, (word, freq) in enumerate(top_500, 1):
     print(f"{rank} | {word} | {freq}")

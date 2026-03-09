@@ -4,7 +4,7 @@ import random
 
 # Load sentiment scores
 sentiment_dict = {}
-with open("sentiment_scores.txt", "r", encoding="utf-8") as fin:
+with open("sentiment_scores.txt", "r") as fin:
     for line in fin:
         parts = line.strip().split('\t')
         if len(parts) == 2:
@@ -36,7 +36,7 @@ def get_emotion(score):
 
 # Read tweets and calculate sentiments
 tweets = []
-with open("twitter_data1.txt", "r", encoding="utf-8") as fin:
+with open("twitter_data1.txt", "r") as fin:
     for line in fin:
         line = line.strip()
         if line:
@@ -50,10 +50,6 @@ with open("twitter_data1.txt", "r", encoding="utf-8") as fin:
 # Select 10 random tweets
 random_tweets = random.sample(tweets, min(10, len(tweets)))
 
-# Display and save results
-print("=" * 80)
-print("TWEET SENTIMENT ANALYSIS")
-print("=" * 80)
 print()
 
 for i, tweet in enumerate(random_tweets, 1):
@@ -61,20 +57,8 @@ for i, tweet in enumerate(random_tweets, 1):
     sentiment_score = calculate_sentiment(text)
     emotion = get_emotion(sentiment_score)
 
-    # Print to console with error handling for special characters
-    try:
-        print(f"Tweet {i}:")
-        print(f"Text: {text}")
-        print(f"Sentiment Score: {sentiment_score}")
-        print(f"Emotion: {emotion}")
-        print()
-    except UnicodeEncodeError:
-        # Fallback for characters that can't be displayed
-        print(f"Tweet {i}:")
-        print(f"Text: {text.encode('ascii', 'replace').decode('ascii')}")
-        print(f"Sentiment Score: {sentiment_score}")
-        print(f"Emotion: {emotion}")
-        print()
-
-
-
+    print(f"Tweet {i}:")
+    print(f"Text: {text}")
+    print(f"Sentiment Score: {sentiment_score}")
+    print(f"Emotion: {emotion}")
+    print()
